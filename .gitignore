@@ -41,12 +41,6 @@ config.status
 autom4te.cache/
 *.autosave
 
-# 第三方库 (Third-party Libraries)
-wxWidgets-*/
-CEGUI-*/
-dependencies/
-libs/
-
 # 系统文件 (System Files)
 .DS_Store
 Thumbs.db
@@ -61,3 +55,6 @@ cegui.log
 *.bak
 *.backup
 *~
+
+# 注意: wxWidgets 源码已经在仓库中，不排除
+# Note: wxWidgets source is already in the repository, not excluded
