@@ -1,0 +1,63 @@
+# 编译产物 (Build Artifacts)
+*.o
+*.obj
+*.lo
+*.la
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+
+# 构建目录 (Build Directories)
+.deps/
+.libs/
+build/
+bin/
+obj/
+Debug/
+Release/
+x64/
+Win32/
+
+# IDE 配置文件 (IDE Files)
+.vs/
+.vscode/
+*.suo
+*.user
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.opendb
+.idea/
+*.iml
+
+# 自动生成文件 (Auto-generated Files)
+Makefile
+config.h
+config.log
+config.status
+autom4te.cache/
+*.autosave
+
+# 第三方库 (Third-party Libraries)
+wxWidgets-*/
+CEGUI-*/
+dependencies/
+libs/
+
+# 系统文件 (System Files)
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# 日志文件 (Log Files)
+*.log
+cegui.log
+
+# 备份文件 (Backup Files)
+*.bak
+*.backup
+*~
