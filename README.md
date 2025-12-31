@@ -1,26 +1,95 @@
 # CEImagesetEditor
 
-CEImagesetEditor 是一个用于创建和编辑 CEGUI Imageset 文件的图形化工具。它基于 wxWidgets 框架开发，并集成了 CEGUI 渲染引擎。
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
+![License](https://img.shields.io/badge/license-GPL-blue)
+![CEGUI](https://img.shields.io/badge/dependency-CEGUI%200.5%2B-orange)
+![wxWidgets](https://img.shields.io/badge/dependency-wxWidgets%202.6%2B-red)
 
-## 📖 文档 (Documentation)
+**CEImagesetEditor** is a professional graphical tool designed for creating and editing [CEGUI](http://www.cegui.org.uk) Imageset files. Built with the robust **wxWidgets** framework, it offers a visual environment to manage image regions and properties, streamlining the workflow for GUI development in games and applications.
 
-项目包含完整的技术文档，位于 `docs/` 目录下：
+---
 
-- [项目概览 (Project Overview)](docs/01_项目概览_Project_Overview.md)
-- [核心模块 (Core Modules)](docs/02_核心核心模块_Core_Modules.md)
-- [数据处理 (Data Handling)](docs/03_数据处理_Data_Handling.md)
-- [用户界面架构 (UI Architecture)](docs/04_用户界面架构_UI_Architecture.md)
-- [API 参考 (API Reference)](docs/05_API_Reference.md)
+## 🚀 Key Features
 
-## 🛠️ 构建与开发 (Build & Development)
+*   **Visual Editing**: Intuitive interface to define and modify image regions on a texture.
+*   **Real-time Preview**: Integrated CEGUI rendering to verify how imagesets look.
+*   **Cross-Platform**: Compatible with Windows, Linux, and macOS.
+*   **Format Support**: Fully supports standard CEGUI Imageset XML format.
+*   **Auto-Scaling**: Tools to handle resolution scaling and native resolution settings.
 
-### 先决要求 (Requirements)
-- CEGUI (0.5.0+)
-- wxWidgets (2.6.0+)
-- Visual Studio .NET 2003 (7.1) / 2005 (8.0) / 2008 (9.0)
+## � Documentation
 
-### 常用脚本 (Scripts)
-- **更新文档**: 运行 `update_docs.bat` 自动生成最新的 API 文档。
+Comprehensive documentation is available in the `docs/` directory:
 
-## 📄 原始说明 (Original Readme)
-请查看 [README.old](README.old) 获取原始的项目构建和安装说明。
+*   [**Project Overview**](docs/01_项目概览_Project_Overview.md): Architecture and technology stack.
+*   [**Core Modules**](docs/02_核心核心模块_Core_Modules.md): Details on `EditorDocument` and application entry points.
+*   [**Data Handling**](docs/03_数据处理_Data_Handling.md): How XML parsing and generation works.
+*   [**UI Architecture**](docs/04_用户界面架构_UI_Architecture.md): Breakdown of the Document-View model and UI components.
+*   [**API Reference**](docs/05_API_Reference.md): Auto-generated class and method reference.
+
+> **Note**: You can regenerate the API documentation by running `update_docs.bat` in the project root.
+
+## 🛠️ Installation & Build
+
+### Prerequisites
+*   **CEGUI**: Version 0.5.0 or later.
+*   **wxWidgets**: Version 2.6.0 or later.
+*   **C++ Compiler**: GCC (Linux/Mac) or Visual Studio (Windows).
+
+### Linux / macOS (Autotools)
+
+1.  Configure the build environment:
+    ```bash
+    ./configure
+    ```
+2.  Compile the source:
+    ```bash
+    make
+    ```
+3.  Install (optional):
+    ```bash
+    sudo make install
+    ```
+
+### Windows (Visual Studio)
+
+Project files are provided for various Visual Studio versions:
+*   **VS .NET 2003 (7.1)**: `vc++7.1/`
+*   **VS 2005 (8.0)**: `vc++8/`
+*   **VS 2008 (9.0)**: `vc++9/`
+
+Open the appropriate solution file (`.sln`) and build the **Release** or **Debug** configuration.
+
+## 📝 Usage
+
+1.  Launch `CEImagesetEditor`.
+2.  **Open** an existing `.imageset` file or **Create** a new one.
+3.  Load the source image file (Texture).
+4.  Use the mouse to draw/resize regions on the canvas.
+5.  Set properties (Naming, Offsets) in the properties panel.
+6.  **Save** your work.
+
+## 🤝 Contributing
+
+Contributions are welcome!
+1.  Fork the repository.
+2.  Create your feature branch (`git checkout -b feature/AmazingFeature`).
+3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4.  Push to the branch (`git push origin feature/AmazingFeature`).
+5.  Open a Pull Request.
+
+## � Authors
+
+**Core Team:**
+*   **Paul D Turner (CrazyEddie)** - Project co-ordination, Mac/Linux support.
+*   **Frederico Jernimo (fjeronimo)** - Code lead, Win32 support.
+*   **Tomas Lindquist Olsen (lindquist)** - Testing & premake support.
+
+**Original Author:**
+*   **Martin Fleurent (martignasse)**
+
+For a full list of contributors, please refer to the [AUTHORS](AUTHORS) file.
+
+## 📄 License
+
+This project is licensed under the **GNU General Public License (GPL)**. See the [COPYING](COPYING) file for details.
