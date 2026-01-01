@@ -1,0 +1,38 @@
+{
+    "mcpServers": {
+        "filesystem": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-filesystem",
+                "e:\\CEImagesetEditor-0.7.1"
+            ],
+            "description": "Access to project source files and documentation."
+        },
+        "git": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-git",
+                "e:\\CEImagesetEditor-0.7.1"
+            ],
+            "description": "Git repository operations for version control interaction."
+        },
+        "memory": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-memory"
+            ],
+            "description": "Persistent memory for project context and user preferences."
+        },
+        "sequential-thinking": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-sequential-thinking"
+            ],
+            "description": "Advanced reasoning capabilities for complex architectural analysis."
+        }
+    }
+}

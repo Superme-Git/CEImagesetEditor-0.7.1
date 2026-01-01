@@ -1,218 +1,212 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  For project details and authors, refer to README and AUTHORS files
+//  有关项目详情和作者，请参阅 README 和 AUTHORS 文件
 //
-//  This file is free software; you can redistribute it and/or
-//  modify it under the terms of the GNU General Public License
-//  as published by the Free Software Foundation; either version 2
-//  of the License, or (at your option) any later version.
+//  本文件是自由软件；您可以根据自由软件基金会发布的
+//  GNU 通用公共许可证条款重新分发和/或修改它；
+//  版本 2 或（由您选择）任何更高版本。
 //
-//  This file is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-//  GNU General Public License for more details.
+//  分发此文件是希望它有用，
+//  但没有任何担保；甚至没有对适销性或
+//  特定用途适用性的暗示担保。有关更多详细信息，请参阅
+//  GNU 通用公共许可证。
 //
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software
-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+//  您应该已收到随本程序一起分发的 GNU 通用公共许可证副本；
+//  如果没有，请写信给 Free Software Foundation, Inc.,
+//  59 Temple Place - Suite 330, Boston, MA  02111-1307, USA。
 //
-//  To view the licence online, go to: http://www.gnu.org/copyleft/gpl.html
+//  要在线查看许可证，请访问：http://www.gnu.org/copyleft/gpl.html
 ////////////////////////////////////////////////////////////////////////////////
 
 #ifndef _EDITOR_CANVAS_H_
 #define _EDITOR_CANVAS_H_
 
-
-// Include wxWidgets' headers
-#include <wx/wx.h> 
-// CEGUI headers
+// 包含 wxWidgets 头文件
+#include <wx/wx.h>
+// CEGUI 头文件
 #include <CEGUISystem.h>
 #include <RendererModules/OpenGL/CEGUIOpenGLRenderer.h>
 
-#include "wx/glcanvas.h"
 #include "EditorDocument.h"
-
+#include "wx/glcanvas.h"
 
 class EditorView;
 
-/** Provides OpenGL output. This canvas is the actual visible part of our "view"
-* on the "document". The CEGUI system must be initialised when rendering, which is verified.
-*/
+/** 提供 OpenGL 输出。此画布是我们对“文档”的“视图”的实际可见部分。
+ * 渲染时必须初始化 CEGUI 系统，这会经过验证。
+ */
 
-class EditorGLCanvas : public wxGLCanvas
-{
+class EditorGLCanvas : public wxGLCanvas {
 public:
-    /** Constructor.*/
-    EditorGLCanvas( EditorView* view, wxWindow* parent, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize );
+  /** 构造函数。*/
+  EditorGLCanvas(EditorView *view, wxWindow *parent,
+                 const wxPoint &pos = wxDefaultPosition,
+                 const wxSize &size = wxDefaultSize);
 
-    /** Destructor.*/
-    ~EditorGLCanvas();
+  /** 析构函数。*/
+  ~EditorGLCanvas();
 
-    /** Updates the openGL viewport setup.*/
-    void changeSize( int newWidth, int newHeight );
+  /** 更新 OpenGL 视口设置。*/
+  void changeSize(int newWidth, int newHeight);
 
-    void setBackgroundColour( const wxColour& colour );
-    void setImage( const wxString& name );
+  void setBackgroundColour(const wxColour &colour);
+  void setImage(const wxString &name);
 
-    // region manipulation
-    void selectRegion( const wxString& name );
-    void renameRegion( const wxString& currentname, const wxString& newname );
-    void addRegion( const wxString& name, const wxRect& dim );
-    void setRegionArea( const wxString& name, const wxRect& dim );
-    void deleteRegion( const wxString& name );
-    void deleteAllRegions();
+  // 区域操作
+  void selectRegion(const wxString &name);
+  void renameRegion(const wxString &currentname, const wxString &newname);
+  void addRegion(const wxString &name, const wxRect &dim);
+  void setRegionArea(const wxString &name, const wxRect &dim);
+  void deleteRegion(const wxString &name);
+  void deleteAllRegions();
 
-    void computeZoomFactor( int MouseWheelDirection );
+  void computeZoomFactor(int MouseWheelDirection);
 
-    void setView ( EditorView* aView )
-    {
-        m_view = aView;
-    }
+  void setView(EditorView *aView) { m_view = aView; }
 
-    /** Forces a reset of cegui.*/
-    bool Reset();
+  /** 强制重置 cegui。*/
+  bool Reset();
 
-    /** Forces a re-draw.*/
-    void Render();
+  /** 强制重绘。*/
+  void Render();
 
-    /** Returns whether the document is still valid or not.*/
-    bool isDocumentValid() const;
+  /** 返回文档是否仍然有效。*/
+  bool isDocumentValid() const;
 
 private:
-    /** The view to which we are attached.*/
-    EditorView* m_view;
+  /** 我们依附的视图。*/
+  EditorView *m_view;
 
-    /** Pointer to cegui singleton.*/
-    CEGUI::System* m_GUISystem;
-    /** Pointer to cegui renderer.*/
-    /** OpenGL context for wxWidgets 3.0+ */
-    wxGLContext* m_context;
+  /** 指向 cegui 单例的指针。*/
+  CEGUI::System *m_GUISystem;
+  /** 指向 cegui 渲染器的指针。*/
+  CEGUI::OpenGLRenderer *m_GUIRenderer;
+  /** wxWidgets 3.0+ 的 OpenGL 上下文 */
+  wxGLContext *m_context;
 
-    // CEGUI widgets
-    CEGUI::Window* m_imagesetStaticImage;
+  // CEGUI 小部件
+  CEGUI::Window *m_imagesetStaticImage;
 
-    /** True when big steps should be used when moving selection by key.*/
-    bool m_useBigSteps;
+  /** 当按键移动选区时应使用大步长时为 True。*/
+  bool m_useBigSteps;
 
-    //! Used to track drag motion.
-    wxPoint m_dragPoint;
+  //! 用于跟踪拖动动作。
+  wxPoint m_dragPoint;
 
-    /** Current document zoom. float because it's as relative value to original size egal 1.*/
-    float m_zoomFactor ;
+  /** 当前文档缩放。float 类型，因为它是相对于原始大小（等于 1）的相对值。*/
+  float m_zoomFactor;
 
-    /** Current canvas width. Used alot so it's cached.*/
-    float m_realWidth;
+  /** 当前画布宽度。经常使用，所以进行了缓存。*/
+  float m_realWidth;
 
-    /** Current canvas height. Used alot so it's cached.*/
-    float m_realHeight;
+  /** 当前画布高度。经常使用，所以进行了缓存。*/
+  float m_realHeight;
 
-    /** Last known mouseX position.*/
-    long m_lastMouseX;
+  /** 上次已知的 mouseX 位置。*/
+  long m_lastMouseX;
 
-    /** Last known mouseY position.*/
-    long m_lastMouseY;
+  /** 上次已知的 mouseY 位置。*/
+  long m_lastMouseY;
 
-    // Here we have scroll state variables; required because wxWidgets has
-    // different behavior on different platforms for wxWindow scrollbars.
-    // (wxGTK automated them without intervention, wxMSW did not).
-    //! current horizontal scroll position
-    int m_scrollPosX;
-    //! horizontal size of the 'document' (zoomed image width)
-    int m_scrollDocX;
-    //! horizontal 'page' size (width of the canvas widow)
-    int m_scrollPageX;
-    //! current vertical scroll position
-    int m_scrollPosY;
-    //! vertical size of the 'document' (zoomed image height)
-    int m_scrollDocY;
-    //! vertical 'page' size (height of the canvas widow)
-    int m_scrollPageY;
+  // 这里我们要有滚动状态变量；这是必须的，因为 wxWidgets 在不同平台上
+  // 对于 wxWindow 滚动条有不同的行为。（wxGTK 自动处理它们而无需干预，wxMSW
+  // 则没有）。
+  //! 当前水平滚动位置
+  int m_scrollPosX;
+  //! '文档'的水平大小（缩放后的图像宽度）
+  int m_scrollDocX;
+  //! 水平'页面'大小（画布窗口的宽度）
+  int m_scrollPageX;
+  //! 当前垂直滚动位置
+  int m_scrollPosY;
+  //! '文档'的垂直大小（缩放后的图像高度）
+  int m_scrollDocY;
+  //! 垂直'页面'大小（画布窗口的高度）
+  int m_scrollPageY;
 
-    /** Renders the current imageset.*/
-    void renderImageset();
+  /** 渲染当前图像集。*/
+  void renderImageset();
 
-    /** Initialises the CEGUI core + renderer. We don't cleanup the frame when
-    * new view is spawned, so this is a good place to put the CEGUI functionality.*/
-    void initialiseCEGUI();
+  /** 初始化 CEGUI 核心 + 渲染器。当生成新视图时我们不清理框架，
+   * 所以这是放置 CEGUI 功能的好地方。*/
+  void initialiseCEGUI();
 
-    /** Shut down the CEGUI system, freeing all CEGUI based resources.*/
-    void cleanupCEGUI();
+  /** 关闭 CEGUI 系统，释放所有基于 CEGUI 的资源。*/
+  void cleanupCEGUI();
 
-    bool resetCEGUI();
-    void createCEGUIWindows();
+  bool resetCEGUI();
+  void createCEGUIWindows();
 
+  //! 更新滚动条
+  void updateScrollbars();
+  //! 根据滚动条值更新图像的滚动位置。
+  void updateImageScrollPosition();
 
-    //! Update the scrollbars
-    void updateScrollbars();
-    //! update scroll position of the image based on scrollbar values.
-    void updateImageScrollPosition();
+  // 我们用于触发光标更改的处理程序。
+  bool handleRegionNorthSouthCursor(const CEGUI::EventArgs &e);
+  bool handleRegionEastWestCursor(const CEGUI::EventArgs &e);
+  bool handleRegionNorthEastSouthWestCursor(const CEGUI::EventArgs &e);
+  bool handleRegionNorthWestSouthEastCursor(const CEGUI::EventArgs &e);
+  bool handleRegionMoveCursor(const CEGUI::EventArgs &e);
+  bool handleRegionNormalCursor(const CEGUI::EventArgs &e);
 
-    // handlers which we use to trigger cursor changes.
-    bool handleRegionNorthSouthCursor(const CEGUI::EventArgs& e);
-    bool handleRegionEastWestCursor(const CEGUI::EventArgs& e);
-    bool handleRegionNorthEastSouthWestCursor(const CEGUI::EventArgs& e);
-    bool handleRegionNorthWestSouthEastCursor(const CEGUI::EventArgs& e);
-    bool handleRegionMoveCursor(const CEGUI::EventArgs& e);
-    bool handleRegionNormalCursor(const CEGUI::EventArgs& e);
+  //! 用于自动激活图像区域的处理程序
+  bool handleRegionMouseEnter(const CEGUI::EventArgs &e);
+  //! 用于自动停用图像区域的处理程序
+  bool handleRegionMouseLeave(const CEGUI::EventArgs &e);
+  //! 用于在区域激活时做出反应的处理程序
+  bool handleRegionActivated(const CEGUI::EventArgs &e);
+  //! 用于在区域停用时做出反应的处理程序
+  bool handleRegionDeactivated(const CEGUI::EventArgs &e);
+  //! 用于在区域更改时更新属性面板的处理程序
+  bool handleRegionModified(const CEGUI::EventArgs &e);
 
-    //! handler used to auto activate image regions
-    bool handleRegionMouseEnter(const CEGUI::EventArgs& e);
-    //! handler used to auto deactivate image regions
-    bool handleRegionMouseLeave(const CEGUI::EventArgs& e);
-    //! handler used to react when a region is activated
-    bool handleRegionActivated( const CEGUI::EventArgs& e );
-    //! handler used to react when a region is deactivated
-    bool handleRegionDeactivated( const CEGUI::EventArgs& e );
-    //! handler used to update properties panel when region changes
-    bool handleRegionModified( const CEGUI::EventArgs& e );
+  //
+  // 下面是 wxWidgets 部分
+  //
+  /** 处理 wxSizeEvent。将新分辨率传播到 gui 渲染器。*/
+  void OnResize(wxSizeEvent &event);
 
-    //
-    // wxWidgets bits below
-    //
-    /** Handled wxSizeEvent. Propagate the new resolution to the gui renderer.*/
-    void OnResize( wxSizeEvent& event );
+  /** 事件处理程序：通知我们画布需要重绘。我们渲染当前图像集。*/
+  void OnPaint(wxPaintEvent &event);
 
-    /** Event handler: notifies us that the canvas needs a repaint. We render the current imageset.*/
-    void OnPaint( wxPaintEvent& event );
+  /** 事件处理程序：通知我们画布需要刷新背景。
+   * 如果有背景的话，这是绘制当前背景的好时机。*/
+  void OnErase(wxEraseEvent &event);
 
-    /** Event handler: notifies us that the canvas needs a refresh of the background.
-    * a good moment to draw the current background, if any.*/
-    void OnErase( wxEraseEvent& event );
+  /** 事件处理程序：我们在这里处理鼠标输入。*/
+  void OnMouseMotion(wxMouseEvent &event);
 
-    /** Event handler: we handle mouse input here.*/
-    void OnMouseMotion( wxMouseEvent& event );
+  /** 事件处理程序：我们在这里处理鼠标输入。*/
+  void OnLeftDown(wxMouseEvent &event);
 
-    /** Event handler: we handle mouse input here.*/
-    void OnLeftDown( wxMouseEvent& event );
+  /** 事件处理程序：我们在这里处理鼠标输入。*/
+  void OnLeftUp(wxMouseEvent &event);
 
-    /** Event handler: we handle mouse input here.*/
-    void OnLeftUp( wxMouseEvent& event );
+  /** 事件处理程序：我们在这里处理鼠标输入。*/
+  void OnRightDown(wxMouseEvent &event);
 
-    /** Event handler: we handle mouse input here.*/
-    void OnRightDown( wxMouseEvent& event );
+  /** 事件处理程序：我们在这里处理鼠标输入。*/
+  void OnRightUp(wxMouseEvent &event);
 
-    /** Event handler: we handle mouse input here.*/
-    void OnRightUp( wxMouseEvent& event );
+  /** 事件处理程序：我们在这里处理鼠标输入。*/
+  void OnMiddleDown(wxMouseEvent &event);
 
-    /** Event handler: we handle mouse input here.*/
-    void OnMiddleDown( wxMouseEvent& event );
+  /** 事件处理程序：我们在这里处理鼠标输入。*/
+  void OnMiddleUp(wxMouseEvent &event);
 
-    /** Event handler: we handle mouse input here.*/
-    void OnMiddleUp( wxMouseEvent& event );
+  /** 事件处理程序：我们在这里处理鼠标输入。*/
+  void OnMouseWheel(wxMouseEvent &event);
 
-    /** Event handler: we handle mouse input here.*/
-    void OnMouseWheel( wxMouseEvent& event );
+  /** 事件处理程序：处理按键按下事件。我们用它来移动当前选区。*/
+  void OnKeyDown(wxKeyEvent &event);
 
-    /** Event handler: handles key-down events. We use it to move the current selection.*/
-    void OnKeyDown( wxKeyEvent& event );
+  /** 事件处理程序：停止移动当前选区。*/
+  void OnKeyUp(wxKeyEvent &event);
 
-    /** Event handler: stops moving the current selection.*/
-    void OnKeyUp( wxKeyEvent& event );
+  /** 事件处理程序：滚动条更改 */
+  void OnScrollWin(wxScrollWinEvent &event);
 
-    /** Event handler: scrollbar changes */
-    void OnScrollWin( wxScrollWinEvent& event );
-
-    DECLARE_EVENT_TABLE()
+  DECLARE_EVENT_TABLE()
 };
 
 #endif // _EDITOR_CANVAS_H_
-

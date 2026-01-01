@@ -1,0 +1,45 @@
+{
+    "skills": [
+        {
+            "name": "EnsureEncoding",
+            "description": "Ensures the target file is saved with UTF-8 BOM encoding. Visual Studio 2013 requires BOM for files with non-ASCII characters.",
+            "parameters": {
+                "file_path": "string"
+            }
+        },
+        {
+            "name": "TranslateComments",
+            "description": "Translates C++ comments from English to Chinese while preserving Doxygen formatting.",
+            "parameters": {
+                "file_path": "string"
+            }
+        },
+        {
+            "name": "VerifyVS2013Compatibility",
+            "description": "Checks code for C++11 features not supported by MSVC 12.0 (VS2013).",
+            "features_to_flag": [
+                "constexpr",
+                "noexcept",
+                "std::make_unique",
+                "structured binding",
+                "inline variables"
+            ]
+        },
+        {
+            "name": "GenerateDocStub",
+            "description": "Generates a markdown documentation stub for a given C++ class following project documentation templates.",
+            "parameters": {
+                "class_name": "string",
+                "output_path": "string"
+            }
+        }
+    ],
+    "workflows": {
+        "build_verification": [
+            "Check vcvarsall.bat location",
+            "Verify wxWidgets and CEGUI environment variables",
+            "Check Project config (Debug/Release, Win32)",
+            "Ensure v120 toolset selection"
+        ]
+    }
+}
