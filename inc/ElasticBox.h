@@ -1,444 +1,433 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  For project details and authors, refer to README and AUTHORS files
+//  有关项目详情和作者，请参阅 README 和 AUTHORS 文件
 //
-//  This file is free software; you can redistribute it and/or
-//  modify it under the terms of the GNU General Public License
-//  as published by the Free Software Foundation; either version 2
-//  of the License, or (at your option) any later version.
+//  本文件是自由软件；您可以根据自由软件基金会发布的
+//  GNU 通用公共许可证条款重新分发和/或修改它；
+//  版本 2 或（由您选择）任何更高版本。
 //
-//  This file is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-//  GNU General Public License for more details.
+//  分发此文件是希望它有用，
+//  但没有任何担保；甚至没有对适销性或
+//  特定用途适用性的暗示担保。有关更多详细信息，请参阅
+//  GNU 通用公共许可证。
 //
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software
-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+//  您应该已收到随本程序一起分发的 GNU 通用公共许可证副本；
+//  如果没有，请写信给 Free Software Foundation, Inc.,
+//  59 Temple Place - Suite 330, Boston, MA  02111-1307, USA。
 //
-//  To view the licence online, go to: http://www.gnu.org/copyleft/gpl.html
+//  要在线查看许可证，请访问：http://www.gnu.org/copyleft/gpl.html
 ////////////////////////////////////////////////////////////////////////////////
 #ifndef _ELASTIC_BOX_WIDGET_H_
 #define _ELASTIC_BOX_WIDGET_H_
 
 // parent class
-#include <CEGUIWindow.h> 
+#include <CEGUIWindow.h>
 // for factory creation
 #include <CEGUIWindowFactory.h>
 // we reuse the SizingLocation enumeration from FrameWindow
-#include <elements/CEGUIFrameWindow.h> 
+#include <elements/CEGUIFrameWindow.h>
 // properties for this class
 #include "ElasticBoxProperties.h"
 
 /*!
 \brief
-    Class for a bounding box widget.
+    边界框小部件的类。
 
-    The elastic box widget is a custom widget for the CEImagesetEditor; it
-    provides a widget that can be drag sized and drag moved.  The purpose of
-    the widget is to provide a means to visually define some region.
+    elastic box（弹性框）小部件是 CEImagesetEditor 的自定义小部件；它提供了一个
+    可以拖动调整大小和拖动移动的小部件。小部件的目的是提供
+    一种可视化定义某个区域的方法。
 
-    ElasticBox is based somewhat on FrameWindow, from the core CEGUI
-    library.
+    ElasticBox 在某种程度上基于 CEGUI 核心库中的 FrameWindow。
 */
-class ElasticBox : public CEGUI::Window
-{
+class ElasticBox : public CEGUI::Window {
 public:
-    //! Namespace for global events
-    static const CEGUI::String EventNamespace;
-    //! Window factory name
-    static const CEGUI::String WidgetTypeName;
-    //! Event fired when the cursor is to be changed to normal
-    static const CEGUI::String EventSetNormalCursor;
-    //! Event fired when the cursor is to be changed for moving
-    static const CEGUI::String EventSetMoveCursor;
-    //! Event fired when the cursor is to be changed for east / west sizing
-    static const CEGUI::String EventSetEastWestCursor;
-    //! Event fired when the cursor is to be changed for north / south sizing
-    static const CEGUI::String EventSetNorthSouthCursor;
-    //! Event fired when the cursor is to be changed for north-east / south-west sizing
-    static const CEGUI::String EventSetNorthEastSouthWestCursor;
-    //! Event fired when the cursor is to be changed for north-west / south-east sizing
-    static const CEGUI::String EventSetNorthWestSouthEastCursor;
-    //! Default size for the sizing border (in pixels)
-    static const float DefaultSizingBorderSize;
+  //! 全局事件的命名空间
+  static const CEGUI::String EventNamespace;
+  //! 窗口工厂名称
+  static const CEGUI::String WidgetTypeName;
+  //! 当光标要更改为正常时触发的事件
+  static const CEGUI::String EventSetNormalCursor;
+  //! 当光标要更改为移动时触发的事件
+  static const CEGUI::String EventSetMoveCursor;
+  //! 当光标要更改为东西方向（水平）调整大小时触发的事件
+  static const CEGUI::String EventSetEastWestCursor;
+  //! 当光标要更改为南北方向（垂直）调整大小时触发的事件
+  static const CEGUI::String EventSetNorthSouthCursor;
+  //! 当光标要更改为东北/西南方向调整大小时触发的事件
+  static const CEGUI::String EventSetNorthEastSouthWestCursor;
+  //! 当光标要更改为西北/东南方向调整大小时触发的事件
+  static const CEGUI::String EventSetNorthWestSouthEastCursor;
+  //! 调整大小边框的默认大小（以像素为单位）
+  static const float DefaultSizingBorderSize;
 
-    /*!
-    \brief
-        Constructor for ElasticBox objects.
-    */
-    ElasticBox( const CEGUI::String& name, const CEGUI::String& type );
+  /*!
+  \brief
+      ElasticBox 对象的构造函数。
+  */
+  ElasticBox(const CEGUI::String &name, const CEGUI::String &type);
 
-    /*!
-    \brief
-        Destructor for ElasticBox objects.
-    */
-    virtual ~ElasticBox( void );
+  /*!
+  \brief
+      ElasticBox 对象的析构函数。
+  */
+  virtual ~ElasticBox(void);
 
-    /*!
-    \brief
-        Return whether this window is sizable (by the user).
+  /*!
+  \brief
+      返回此窗口是否可（由用户）调整大小。
 
-    \return
-        - true if the window can be sized
-        - false if the window can not be sized
-    */
-    bool isSizable( void ) const;
+  \return
+      - true 如果窗口可调整大小
+      - false 如果窗口不可调整大小
+  */
+  bool isSizable(void) const;
 
-    /*!
-    \brief
-        Return whether the window is movable (by the user).
+  /*!
+  \brief
+      返回窗口是否可（由用户）移动。
 
-    \return
-        - true if the window can be moved around
-        - false if the window is fixed in position
-    */
-    bool isMovable( void ) const;
+  \return
+      - true 如果窗口可移动
+      - false 如果窗口位置固定
+  */
+  bool isMovable(void) const;
 
-    /*!
-    \brief
-        Return the thickness of the sizing border in pixels.
+  /*!
+  \brief
+      返回调整大小边框的厚度（以像素为单位）。
 
-    \return
-        float value describing the thickness of the sizing border in pixels.
-    */
-    float getSizingBorderThickness( void ) const;
+  \return
+      描述调整大小边框厚度的 float 值（以像素为单位）。
+  */
+  float getSizingBorderThickness(void) const;
 
-    /*!
-    \brief
-        Returns the current scale 'snap' value.
+  /*!
+  \brief
+      返回当前的缩放“捕捉”值。
 
-        The scale snap value is used to limit sizing and moving operations to
-        pixel multiples of the scale snap value (useful when operating upon a
-        scaled image for example).  Defaults to 1.
+      缩放捕捉值用于将调整大小和移动操作限制为缩放捕捉值的
+      像素倍数（例如，在操作缩放图像时很有用）。默认为 1。
 
-    \return
-        float value describing the current scale snap value.
-    */
-    float getScaleSnap( void ) const;
+  \return
+      描述当前缩放捕捉值的 float 值。
+  */
+  float getScaleSnap(void) const;
 
-    /*!
-    \brief
-        Enables or disables sizing (by the user) for this window.
+  /*!
+  \brief
+      启用或禁用此窗口的（用户）调整大小。
 
-    \param setting
-        - true to enable sizing
-        - false to disable sizing.
+  \param setting
+      - true 启用调整大小
+      - false 禁用调整大小
 
-    \return
-        Nothing
-    */
-    void setSizable( bool setting );
+  \return
+      无
+  */
+  void setSizable(bool setting);
 
-    /*!
-    \brief
-        Enables or disables moving (by the user) for this window.
+  /*!
+  \brief
+      启用或禁用此窗口的（用户）移动。
 
-    \param setting
-        - true to enable moving of the window
-        - false to disable moving of the window
+  \param setting
+      - true 启用窗口移动
+      - false 禁用窗口移动
 
-    \return
-        Nothing.
-    */
-    void setMovable( bool setting );
+  \return
+      无。
+  */
+  void setMovable(bool setting);
 
-    /*!
-    \brief
-        Set the size of the sizing border for this window in pixels.
+  /*!
+  \brief
+      设置此窗口的调整大小边框的大小（以像素为单位）。
 
-    \param pixels
-        float value specifying the thickness for the sizing border in pixels.
+  \param pixels
+      指定调整大小边框厚度的 float 值（以像素为单位）。
 
-    \return
-        Nothing.
-    */
-    void setSizingBorderThickness( float pixels );
+  \return
+      无。
+  */
+  void setSizingBorderThickness(float pixels);
 
-    /*!
-    \brief
-        Sets the current scale 'snap' value.
+  /*!
+  \brief
+      设置当前的缩放“捕捉”值。
 
-        The scale snap value is used to limit sizing and moving operations to
-        pixel multiples of the scale snap value (useful when operating upon a
-        scaled image for example).  Defaults to 1.
+      缩放捕捉值用于将调整大小和移动操作限制为缩放捕捉值的
+      像素倍数（例如，在操作缩放图像时很有用）。默认为 1。
 
-    \param value
-        float value describing the scale snap value to be used.
+  \param value
+      描述要使用的缩放捕捉值的 float 值。
 
-    \return
-        Nothing
-    */
-    void setScaleSnap( float value );
+  \return
+      无
+  */
+  void setScaleSnap(float value);
 
-    // Base class implementations and overrides
-    virtual void initialiseComponents( void );
+  // 基类实现和覆盖
+  virtual void initialiseComponents(void);
 
 protected:
-    /*!
-    \brief
-        move the window's left edge by 'delta'.  The rest of the window does
-        not move, thus this changes the size of the Window.
+  /*!
+  \brief
+      将窗口的左边缘移动 'delta'。窗口的其余部分不移动，
+      因此这会改变窗口的大小。
 
-    \param delta
-        float value that specifies the amount to move the window edge, and in
-        which direction.  Positive values make window smaller.
-    */
-    void moveLeftEdge( float delta );
+  \param delta
+      指定移动窗口边缘的量和方向的 float 值。正值使窗口变小。
+  */
+  void moveLeftEdge(float delta);
 
-    /*!
-    \brief
-        move the window's right edge by 'delta'.  The rest of the window does
-        not move, thus this changes the size of the Window.
+  /*!
+  \brief
+      将窗口的右边缘移动 'delta'。窗口的其余部分不移动，
+      因此这会改变窗口的大小。
 
-    \param delta
-        float value that specifies the amount to move the window edge, and in
-        which direction.  Positive values make window larger.
-    */
-    void moveRightEdge( float delta );
+  \param delta
+      指定移动窗口边缘的量和方向的 float 值。正值使窗口变大。
+  */
+  void moveRightEdge(float delta);
 
-    /*!
-    \brief
-        move the window's top edge by 'delta'.  The rest of the window does
-        notmove, thus this changes the size of the Window.
+  /*!
+  \brief
+      将窗口的上边缘移动 'delta'。窗口的其余部分不移动，
+      因此这会改变窗口的大小。
 
-    \param delta
-        float value that specifies the amount to move the window edge, and in
-        which direction.  Positive values make window smaller.
-    */
-    void moveTopEdge( float delta );
+  \param delta
+      指定移动窗口边缘的量和方向的 float 值。正值使窗口变小。
+  */
+  void moveTopEdge(float delta);
 
-    /*!
-    \brief
-        move the window's bottom edge by 'delta'.  The rest of the window does
-        not move, thus this changes the size of the Window.
+  /*!
+  \brief
+      将窗口的下边缘移动 'delta'。窗口的其余部分不移动，
+      因此这会改变窗口的大小。
 
-    \param delta
-        float value that specifies the amount to move the window edge, and in
-        which direction.  Positive values make window larger.
-    */
-    void moveBottomEdge( float delta );
+  \param delta
+      指定移动窗口边缘的量和方向的 float 值。正值使窗口变大。
+  */
+  void moveBottomEdge(float delta);
 
-    /*!
-    \brief
-        check local pixel co-ordinate point 'pt' and return one of the
-        CEGUI::FrameWindow::SizingLocation enumerated values depending where
-        the point falls on the sizing border.
+  /*!
+  \brief
+      检查本地像素坐标点 'pt'，并根据该点落在调整大小边框上的位置
+      返回 CEGUI::FrameWindow::SizingLocation 枚举值之一。
 
-    \param pt
-        Point object describing, in pixels, the window relative offset to check.
+  \param pt
+      Point 对象，描述要检查的相对于窗口的像素偏移量。
 
-    \return
-        One of the CEGUI::FrameWindow::SizingLocation enumerated values that
-        describe which part of the sizing border that \a pt corresponded to,
-        if any.
-    */
-    CEGUI::FrameWindow::SizingLocation getSizingBorderAtPoint( const CEGUI::Point& pt ) const;
+  \return
+      CEGUI::FrameWindow::SizingLocation 枚举值之一，
+      描述 \a pt 对应的调整大小边框部分（如果有）。
+  */
+  CEGUI::FrameWindow::SizingLocation
+  getSizingBorderAtPoint(const CEGUI::Point &pt) const;
 
-    /*!
-    \brief
-        return true if given CEGUI::FrameWindow::SizingLocation is on left edge.
+  /*!
+  \brief
+      如果给定的 CEGUI::FrameWindow::SizingLocation 在左边缘，则返回 true。
 
-    \param loc
-        CEGUI::FrameWindow::SizingLocation value to be checked.
+  \param loc
+      要检查的 CEGUI::FrameWindow::SizingLocation 值。
 
-    \return
-        - true if \a loc is on the left edge.
-        - false if \a loc is not on the left edge.
-    */
-    bool isLeftSizingLocation( CEGUI::FrameWindow::SizingLocation loc ) const;
+  \return
+      - true 如果 \a loc 在左边缘。
+      - false 如果 \a loc 不在左边缘。
+  */
+  bool isLeftSizingLocation(CEGUI::FrameWindow::SizingLocation loc) const;
 
-    /*!
-    \brief
-        return true if given CEGUI::FrameWindow::SizingLocation is on right edge.
+  /*!
+  \brief
+      如果给定的 CEGUI::FrameWindow::SizingLocation 在右边缘，则返回 true。
 
-    \param loc
-        CEGUI::FrameWindow::SizingLocation value to be checked.
+  \param loc
+      要检查的 CEGUI::FrameWindow::SizingLocation 值。
 
-    \return
-        - true if \a loc is on the right edge.
-        - false if \a loc is not on the right edge.
-    */
-    bool isRightSizingLocation( CEGUI::FrameWindow::SizingLocation loc ) const;
+  \return
+      - true 如果 \a loc 在右边缘。
+      - false 如果 \a loc 不在右边缘。
+  */
+  bool isRightSizingLocation(CEGUI::FrameWindow::SizingLocation loc) const;
 
-    /*!
-    \brief
-        return true if given CEGUI::FrameWindow::SizingLocation is on top edge.
+  /*!
+  \brief
+      如果给定的 CEGUI::FrameWindow::SizingLocation 在上边缘，则返回 true。
 
-    \param loc
-        CEGUI::FrameWindow::SizingLocation value to be checked.
+  \param loc
+      要检查的 CEGUI::FrameWindow::SizingLocation 值。
 
-    \return
-        - true if \a loc is on the top edge.
-        - false if \a loc is not on the top edge.
-    */
-    bool isTopSizingLocation( CEGUI::FrameWindow::SizingLocation loc ) const;
+  \return
+      - true 如果 \a loc 在上边缘。
+      - false 如果 \a loc 不在上边缘。
+  */
+  bool isTopSizingLocation(CEGUI::FrameWindow::SizingLocation loc) const;
 
-    /*!
-    \brief
-        return true if given CEGUI::FrameWindow::SizingLocation is on bottom edge.
+  /*!
+  \brief
+      如果给定的 CEGUI::FrameWindow::SizingLocation 在下边缘，则返回 true。
 
-    \param loc
-        CEGUI::FrameWindow::SizingLocation value to be checked.
+  \param loc
+      要检查的 CEGUI::FrameWindow::SizingLocation 值。
 
-    \return
-        - true if \a loc is on the bottom edge.
-        - false if \a loc is not on the bottom edge.
-    */
-    bool isBottomSizingLocation( CEGUI::FrameWindow::SizingLocation loc ) const;
+  \return
+      - true 如果 \a loc 在下边缘。
+      - false 如果 \a loc 不在下边缘。
+  */
+  bool isBottomSizingLocation(CEGUI::FrameWindow::SizingLocation loc) const;
 
-    /*!
-    \brief
-        Return a Rect that describes, in window relative pixel co-ordinates,
-        the outer edge of the sizing area for this window.
-    */
-    CEGUI::Rect getSizingRect( void ) const;
+  /*!
+  \brief
+      返回一个 Rect，它以窗口相对像素坐标描述此窗口的调整大小
+      区域的外边缘。
+  */
+  CEGUI::Rect getSizingRect(void) const;
 
-    /*!
-    \brief
-        Handles the update logic for sizing operations.
+  /*!
+  \brief
+      处理调整大小操作的更新逻辑。
 
-    \param mousePosition
-        Latest mouse position in window local pixel co-ordinates.
-    */
-    void doSizingUpdate( const CEGUI::Point& mousePosition );
+  \param mousePosition
+      窗口本地像素坐标中的最新鼠标位置。
+  */
+  void doSizingUpdate(const CEGUI::Point &mousePosition);
 
-    /*!
-    \brief
-        Handles the update logic for moving operations.
+  /*!
+  \brief
+      处理移动操作的更新逻辑。
 
-    \param mousePosition
-        Latest mouse position in window local pixel co-ordinates.
-    */
-    void doMovingUpdate( const CEGUI::Point& mousePosition );
+  \param mousePosition
+      窗口本地像素坐标中的最新鼠标位置。
+  */
+  void doMovingUpdate(const CEGUI::Point &mousePosition);
 
-    /*!
-    \brief
-        Call appropriate handler to process cursor change requirements.
+  /*!
+  \brief
+      调用适当的处理程序来处理光标更改要求。
 
-        The base class handlers provided here just fire events.
-    */
-    void callCursorChangeHandler( const CEGUI::Point& mousePosition );
+      此处提供的基类处理程序仅触发事件。
+  */
+  void callCursorChangeHandler(const CEGUI::Point &mousePosition);
 
-    /*!
-    \brief
-        Helper to calculate snapped deltas on the x axis.
-    */
-    float calculateSnappedXDelta(float delta);
+  /*!
+  \brief
+      用于计算 x 轴上的捕捉增量的辅助函数。
+  */
+  float calculateSnappedXDelta(float delta);
 
-    /*!
-    \brief
-        Helper to calculate snapped deltas on the y axis.
-    */
-    float calculateSnappedYDelta(float delta);
+  /*!
+  \brief
+      用于计算 y 轴上的捕捉增量的辅助函数。
+  */
+  float calculateSnappedYDelta(float delta);
 
-    /*!
-    \brief
-        Return whether this window was inherited from the given class name at
-        some point in the inheritance hierarchy.
+  /*!
+  \brief
+      返回此窗口是否在继承层次结构的某个点
+      继承自给定的类名。
 
-    \param class_name
-        The class name that is to be checked.
+  \param class_name
+      要检查的类名。
 
-    \return
-        - true if this window was inherited from \a class_name.
-        - false if this window was not inherited from \a class_name.
-    */
-    virtual bool testClassName_impl( const CEGUI::String& class_name ) const;
+  \return
+      - true 如果此窗口继承自 \a class_name。
+      - false 如果此窗口未继承自 \a class_name。
+  */
+  virtual bool testClassName_impl(const CEGUI::String &class_name) const;
 
-    /*!
-    \brief
-        Handler called when the cursor is to be changed back to normal.
-    */
-    virtual void onSetNormalCursor( CEGUI::WindowEventArgs& e );
+  /*!
+  \brief
+      当光标要更改回正常状态时调用的处理程序。
+  */
+  virtual void onSetNormalCursor(CEGUI::WindowEventArgs &e);
 
-    /*!
-    \brief
-        Handler called when the cursor is to be changed for movement.
-    */
-    virtual void onSetMoveCursor( CEGUI::WindowEventArgs& e );
+  /*!
+  \brief
+      当光标要更改为移动时调用的处理程序。
+  */
+  virtual void onSetMoveCursor(CEGUI::WindowEventArgs &e);
 
-    /*!
-    \brief
-        Handler called when the cursor is to be changed for east / west sizing.
-    */
-    virtual void onSetEastWestCursor( CEGUI::WindowEventArgs& e );
+  /*!
+  \brief
+      当光标要更改为东西方向（水平）调整大小时调用的处理程序。
+  */
+  virtual void onSetEastWestCursor(CEGUI::WindowEventArgs &e);
 
-    /*!
-    \brief
-        Handler called when the cursor is to be changed for north / south sizing.
-    */
-    virtual void onSetNorthSouthCursor( CEGUI::WindowEventArgs& e );
+  /*!
+  \brief
+      当光标要更改为南北方向（垂直）调整大小时调用的处理程序。
+  */
+  virtual void onSetNorthSouthCursor(CEGUI::WindowEventArgs &e);
 
-    /*!
-    \brief
-        Handler called when the cursor is to be changed for north-east / south-west sizing.
-    */
-    virtual void onSetNorthEastSouthWestCursor( CEGUI::WindowEventArgs& e );
+  /*!
+  \brief
+      当光标要更改为东北/西南方向调整大小时调用的处理程序。
+  */
+  virtual void onSetNorthEastSouthWestCursor(CEGUI::WindowEventArgs &e);
 
-    /*!
-    \brief
-        Handler called when the cursor is to be changed for north-west / south-east sizing.
-    */
-    virtual void onSetNorthWestSouthEastCursor( CEGUI::WindowEventArgs& e );
+  /*!
+  \brief
+      当光标要更改为西北/东南方向调整大小时调用的处理程序。
+  */
+  virtual void onSetNorthWestSouthEastCursor(CEGUI::WindowEventArgs &e);
 
-    // Overridden event processing
-    virtual void onMouseMove( CEGUI::MouseEventArgs& e );
-    virtual void onMouseButtonDown( CEGUI::MouseEventArgs& e );
-    virtual void onMouseButtonUp( CEGUI::MouseEventArgs& e );
-    virtual void onCaptureLost( CEGUI::WindowEventArgs& e );
+  // 覆盖事件处理
+  virtual void onMouseMove(CEGUI::MouseEventArgs &e);
+  virtual void onMouseButtonDown(CEGUI::MouseEventArgs &e);
+  virtual void onMouseButtonUp(CEGUI::MouseEventArgs &e);
+  virtual void onCaptureLost(CEGUI::WindowEventArgs &e);
 
-    // Implementation Data
-    //! true if window is user-sizable.
-    bool d_sizable;
-    //! true if the window is user-movable
-    bool d_movable;
-    //! true if window is currently being sized.
-    bool d_beingSized;
-    //! true if window is currently being moved.
-    bool d_beingMoved;
-    //! thickness of the sizing border around this window
-    float d_borderThickness;
-    //! current scale snap value
-    float d_scaleSnap;
-    //! tracks x pixels currently dragged - used for scale snap implementation.
-    float d_xSnapPixelsMoved; 
-    //! tracks y pixels currently dragged - used for scale snap implementation.
-    float d_ySnapPixelsMoved; 
-    //! point window is being dragged at.
-    CEGUI::Point d_dragPoint;
-    /** Tracks last sizing location we knew about.  Required because at high
-     * zoom - due to 'snap' - we're likely to move the mouse off the edge of the
-     * window which will then not show up as a sizing location, causing very
-     * rough response.
-    */
-    CEGUI::FrameWindow::SizingLocation d_lastSizingLocation;
+  // 实现数据
+  //! 如果窗口可由用户调整大小，则为 true。
+  bool d_sizable;
+  //! 如果窗口可由用户移动，则为 true。
+  bool d_movable;
+  //! 如果窗口当前正在被调整大小，则为 true。
+  bool d_beingSized;
+  //! 如果窗口当前正在被移动，则为 true。
+  bool d_beingMoved;
+  //! 此窗口周围调整大小边框的厚度
+  float d_borderThickness;
+  //! 当前缩放捕捉值
+  float d_scaleSnap;
+  //! 跟踪当前拖动的 x 像素 - 用于缩放捕捉实现。
+  float d_xSnapPixelsMoved;
+  //! 跟踪当前拖动的 y 像素 - 用于缩放捕捉实现。
+  float d_ySnapPixelsMoved;
+  //! 窗口被拖动的点。
+  CEGUI::Point d_dragPoint;
+  /** 跟踪我们知道的上一个调整大小位置。这是必须的，因为在高缩放级别下
+   * - 由于“捕捉” -
+   * 我们可能会将鼠标移出窗口边缘，此时它将不会显示为调整大小位置，
+   * 从而导致响应非常粗糙。
+   */
+  CEGUI::FrameWindow::SizingLocation d_lastSizingLocation;
 
 private:
-    //! Propery to access the sizable state
-    static ElasticBoxProperties::Sizable d_sizableProperty;
-    //! Property to access the movable state
-    static ElasticBoxProperties::Movable d_movableProperty;
-    //! Property to access the sizing border thickness setting
-    static ElasticBoxProperties::SizingBorderThickness d_borderThicknessProperty;
+  //! 访问可调整大小状态的属性
+  static ElasticBoxProperties::Sizable d_sizableProperty;
+  //! 访问可移动状态的属性
+  static ElasticBoxProperties::Movable d_movableProperty;
+  //! 访问调整大小边框厚度设置的属性
+  static ElasticBoxProperties::SizingBorderThickness d_borderThicknessProperty;
 
-    //! Adds properties to the window!
-    void addElasticBoxProperties( void );
+  //! 将属性添加到窗口！
+  void addElasticBoxProperties(void);
 };
 
 /*!
 \brief
-    WindowFactory class for ElasticBox objects.
+    ElasticBox 对象的 WindowFactory 类。
 */
-class ElasticBoxFactory : public CEGUI::WindowFactory
-{
+class ElasticBoxFactory : public CEGUI::WindowFactory {
 public:
-    ElasticBoxFactory() : CEGUI::WindowFactory( ElasticBox::WidgetTypeName ) {}
-    CEGUI::Window* createWindow(const CEGUI::String& name)
-    { return new ElasticBox(d_type, name); }
-    void destroyWindow(CEGUI::Window* window)
-    { delete window; }
+  ElasticBoxFactory() : CEGUI::WindowFactory(ElasticBox::WidgetTypeName) {}
+  CEGUI::Window *createWindow(const CEGUI::String &name) {
+    return new ElasticBox(d_type, name);
+  }
+  void destroyWindow(CEGUI::Window *window) { delete window; }
 };
 
-ElasticBoxFactory& getElasticBoxFactory();
+ElasticBoxFactory &getElasticBoxFactory();
 
 #endif // _ELASTIC_BOX_WIDGET_H_
