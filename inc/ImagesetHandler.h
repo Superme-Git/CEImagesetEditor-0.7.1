@@ -1,21 +1,20 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  For project details and authors, refer to README and AUTHORS files
+//  有关项目详情和作者，请参阅 README 和 AUTHORS 文件
 //
-//  This file is free software; you can redistribute it and/or
-//  modify it under the terms of the GNU General Public License
-//  as published by the Free Software Foundation; either version 2
-//  of the License, or (at your option) any later version.
+//  本文件是自由软件；您可以根据自由软件基金会发布的
+//  GNU 通用公共许可证条款重新分发和/或修改它；
+//  版本 2 或（由您选择）任何更高版本。
 //
-//  This file is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-//  GNU General Public License for more details.
+//  分发此文件是希望它有用，
+//  但没有任何担保；甚至没有对适销性或
+//  特定用途适用性的暗示担保。有关更多详细信息，请参阅
+//  GNU 通用公共许可证。
 //
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software
-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+//  您应该已收到随本程序一起分发的 GNU 通用公共许可证副本；
+//  如果没有，请写信给 Free Software Foundation, Inc.,
+//  59 Temple Place - Suite 330, Boston, MA  02111-1307, USA。
 //
-//  To view the licence online, go to: http://www.gnu.org/copyleft/gpl.html
+//  要在线查看许可证，请访问：http://www.gnu.org/copyleft/gpl.html
 ////////////////////////////////////////////////////////////////////////////////
 #ifndef _IMAGESET_HANDLER_H_
 #define _IMAGESET_HANDLER_H_
@@ -24,74 +23,84 @@
 
 class EditorDocument;
 /*************************************************************************
-Implementation Classes
-*************************************************************************/ 
+实现类
+*************************************************************************/
 /*!
 \brief
-Handler class used to parse the Imageset XML files using SAX2
+用于使用 SAX2 解析 Imageset XML 文件的处理程序类
 */
-class ImagesetHandler : public CEGUI::XMLHandler
-{
+class ImagesetHandler : public CEGUI::XMLHandler {
 public:
-    /*************************************************************************
-    Construction & Destruction
-    *************************************************************************/
-    /*!
-    \brief
-    Constructor for Imageset::xmlHandler objects
+  /*************************************************************************
+  构造与析构
+  *************************************************************************/
+  /*!
+  \brief
+  Imageset::xmlHandler 对象的构造函数
 
-    \param imageset
-    Pointer to the Imageset object creating this xmlHandler object
-    */
-    ImagesetHandler( EditorDocument* document ) : m_document( document )
-    {}
+  \param document
+  指向创建此 xmlHandler 对象的 EditorDocument 对象的指针
+  */
+  ImagesetHandler(EditorDocument *document) : m_document(document) {}
 
-    /*!
-    \brief
-    Destructor for Imageset::xmlHandler objects
-    */
-    virtual ~ImagesetHandler( void )
-    {}
+  /*!
+  \brief
+  Imageset::xmlHandler 对象的析构函数
+  */
+  virtual ~ImagesetHandler(void) {}
 
-    /*************************************************************************
-    SAX2 Handler overrides
-    *************************************************************************/
-    /*!
-    \brief
-    document processing (only care about elements, schema validates format)
-    */
-    virtual void elementStart( const CEGUI::String& element, const CEGUI::XMLAttributes& attributes );
-    virtual void elementEnd( const CEGUI::String& element );
+  /*************************************************************************
+  SAX2 处理程序覆盖
+  *************************************************************************/
+  /*!
+  \brief
+  文档处理（只关心元素，架构验证格式）
+  */
+  virtual void elementStart(const CEGUI::String &element,
+                            const CEGUI::XMLAttributes &attributes);
+  virtual void elementEnd(const CEGUI::String &element);
 
-    /*************************************************************************
-    Functions used by our implementation
-    *************************************************************************/
+  /*************************************************************************
+  我们的实现使用的函数
+  *************************************************************************/
 
 private:
-    /*************************************************************************
-    Implementation Constants
-    *************************************************************************/
-    static const CEGUI::String ImagesetElement;             //!< Tag name for Imageset elements.
-    static const CEGUI::String ImageElement;                    //!< Tag name for Image elements.
-    static const char   ImagesetNameAttribute[];        //!< Attribute name that stores the name of the Imageset
-    static const char   ImagesetImageFileAttribute[];   //!< Attribute name that stores the filename for the image file.
-    static const char   ImagesetResourceGroupAttribute[];   //!< Attribute name that stores the resource group identifier used when loading image file.
-    static const char   ImagesetNativeHorzResAttribute[];   //!< Optional attribute that stores 'native' horizontal resolution for the Imageset.
-    static const char   ImagesetNativeVertResAttribute[];   //!< Optional attribute that stores 'native' vertical resolution for the Imageset.
-    static const char   ImagesetAutoScaledAttribute[];  //!< Optional attribute that specifies whether the Imageset should be auto-scaled.
-    static const char   ImageNameAttribute[];           //!< Attribute name that stores the name of the new Image.
-    static const char   ImageXPosAttribute[];           //!< Attribute name that stores the x position of the new Image.
-    static const char   ImageYPosAttribute[];           //!< Attribute name that stores the y position of the new Image.
-    static const char   ImageWidthAttribute[];          //!< Attribute name that stores the width of the new Image.
-    static const char   ImageHeightAttribute[];         //!< Attribute name that stores the height of the new Image.
-    static const char   ImageXOffsetAttribute[];        //!< Attribute name that stores the x rendering offset of the new Image.
-    static const char   ImageYOffsetAttribute[];        //!< Attribute name that stores the y rendering offset of the new Image.
+  /*************************************************************************
+  实现常量
+  *************************************************************************/
+  static const CEGUI::String ImagesetElement; //!< Imageset 元素的标签名称。
+  static const CEGUI::String ImageElement;    //!< Image 元素的标签名称。
+  static const char ImagesetNameAttribute[];  //!< 存储 Imageset 名称的属性名称
+  static const char
+      ImagesetImageFileAttribute[]; //!< 存储图像文件文件名的属性名称。
+  static const char ImagesetResourceGroupAttribute
+      []; //!< 存储加载图像文件时使用的资源组标识符的属性名称。
+  static const char
+      ImagesetNativeHorzResAttribute[]; //!< 存储 Imageset
+                                        //!< 的“原始”水平分辨率的可选属性。
+  static const char
+      ImagesetNativeVertResAttribute[]; //!< 存储 Imageset
+                                        //!< 的“原始”垂直分辨率的可选属性。
+  static const char
+      ImagesetAutoScaledAttribute[]; //!< 指定 Imageset
+                                     //!< 是否应自动缩放的可选属性。
+  static const char ImageNameAttribute[]; //!< 存储新 Image 名称的属性名称。
+  static const char
+      ImageXPosAttribute[]; //!< 存储新 Image 的 x 位置的属性名称。
+  static const char
+      ImageYPosAttribute[]; //!< 存储新 Image 的 y 位置的属性名称。
+  static const char ImageWidthAttribute[];  //!< 存储新 Image 宽度的属性名称。
+  static const char ImageHeightAttribute[]; //!< 存储新 Image 高度的属性名称。
+  static const char
+      ImageXOffsetAttribute[]; //!< 存储新 Image 的 x 渲染偏移量的属性名称。
+  static const char
+      ImageYOffsetAttribute[]; //!< 存储新 Image 的 y 渲染偏移量的属性名称。
 
-    /*************************************************************************
-    Implementation Data
-    *************************************************************************/
-    EditorDocument* m_document;         //!< Holds a pointer to the Imageset that created the handler object
+  /*************************************************************************
+  实现数据
+  *************************************************************************/
+  EditorDocument
+      *m_document; //!< 保存指向创建处理程序对象的 EditorDocument 的指针
 };
 
-
-#endif  // end of guard _IMAGESET_HANDLER_H_
+#endif // end of guard _IMAGESET_HANDLER_H_

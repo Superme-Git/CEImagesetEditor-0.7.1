@@ -1,125 +1,114 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  For project details and authors, refer to README and AUTHORS files
+//  有关项目详情和作者，请参阅 README 和 AUTHORS 文件
 //
-//  This file is free software; you can redistribute it and/or
-//  modify it under the terms of the GNU General Public License
-//  as published by the Free Software Foundation; either version 2
-//  of the License, or (at your option) any later version.
+//  本文件是自由软件；您可以根据自由软件基金会发布的
+//  GNU 通用公共许可证条款重新分发和/或修改它；
+//  版本 2 或（由您选择）任何更高版本。
 //
-//  This file is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-//  GNU General Public License for more details.
+//  分发此文件是希望它有用，
+//  但没有任何担保；甚至没有对适销性或
+//  特定用途适用性的暗示担保。有关更多详细信息，请参阅
+//  GNU 通用公共许可证。
 //
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software
-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+//  您应该已收到随本程序一起分发的 GNU 通用公共许可证副本；
+//  如果没有，请写信给 Free Software Foundation, Inc.,
+//  59 Temple Place - Suite 330, Boston, MA  02111-1307, USA。
 //
-//  To view the licence online, go to: http://www.gnu.org/copyleft/gpl.html
+//  要在线查看许可证，请访问：http://www.gnu.org/copyleft/gpl.html
 ////////////////////////////////////////////////////////////////////////////////
 
 #ifndef _EDITOR_VIEW_H_
 #define _EDITOR_VIEW_H_
 
-// Standard wxWidget includes
-#include "wx/wx.h" 
-// More specific wxWidgets includes
-#include "wx/docview.h" 
-//#include "wx/cmdproc.h"
+// 标准 wxWidget 头文件
+#include "wx/wx.h"
+// 更具体的 wxWidgets 头文件
+#include "wx/docview.h"
+// #include "wx/cmdproc.h"
 
 class EditorFrame;
 class EditorGLCanvas;
 class PropertiesPanel;
 
-/** A "view" on a "document". Note that views are not created when the application
- * starts, but only when the user chooses "file->new" or "file->open".
- * Also note that the dialog is not a real view.
+/** "文档"上的"视图"。注意，视图不是在应用程序启动时创建的，
+ * 而是在用户选择“文件->新建”或“文件->打开”时创建的。
+ * 另请注意，对话框不是真正的视图。
  */
-class EditorView: public wxView
-{
-    // Needed for the doc/view managerF
-    DECLARE_DYNAMIC_CLASS( EditorView )
+class EditorView : public wxView {
+  // 文档/视图管理器所需
+  DECLARE_DYNAMIC_CLASS(EditorView)
 
 public:
+  /** 构造函数。*/
+  EditorView();
 
-    /** Constructor.*/
-    EditorView();
+  /** 当文档名称更改（例如保存或新建）时由文档调用。*/
+  void onChangeFilename();
 
-    /** Called by the document when the document's name changes, e.g. on Save or New.*/
-    void onChangeFilename();
+  // 对文档的可能操作
+  void onChangeImageFile(const wxString &newfilename);
 
-    // possible actions on the document
-    void onChangeImageFile( const wxString& newfilename );
+  /** 当图像集名称更改时由文档调用。*/
+  void onChangeImagesetName(const wxString &newname);
 
-    /** Called by the document when the imageset name change.*/
-    void onChangeImagesetName( const wxString& newname );
+  /** 当原始分辨率更改时由文档调用。*/
+  void onChangeNativeResolution(const wxPoint &newnativeres);
 
-    /** Called by the document when the native resolution change.*/
-    void onChangeNativeResolution( const wxPoint& newnativeres );
+  /** 当自动缩放更改时由文档调用。*/
+  void onChangeAutoScaled(const bool newAutoScaled);
 
-    /** Called by the document when the AutoScaled change.*/
-    void onChangeAutoScaled( const bool newAutoScaled );
+  /** 当添加区域时由文档调用。*/
+  void onAddRegion(const wxString &name, const wxRect &dim);
 
-    /** Called by the document when a region is added.*/
-    void onAddRegion( const wxString& name, const wxRect& dim );
+  /** 当删除区域时由文档调用。*/
+  void onDelRegion(const wxString &name);
 
-    /** Called by the document when a region is deleted.*/
-    void onDelRegion( const wxString& name );
+  /** 当所有区域被删除时由文档调用。*/
+  void onDelAllRegion();
 
-    /** Called by the document when all region are deleted.*/
-    void onDelAllRegion();
+  /** 当区域移动和/或缩放时由文档调用。*/
+  void onSetRegionArea(const wxString &name, const wxRect &dim,
+                       const bool evt_src = false);
 
-    /** Called by the document when a region is moved and/or scaled.*/
-    void onSetRegionArea( const wxString& name, const wxRect& dim, const bool evt_src = false );
+  /** 当重命名区域时由文档调用。*/
+  void onRenameRegion(const wxString &currentname, const wxString &newname);
 
-    /** Called by the document when all region are deleted.*/
-    void onRenameRegion( const wxString& currentname, const wxString& newname );
+  // 框架部分更新部分
+  /** 根据当前打开的文档更新主框架的标题栏。*/
+  void updateTitle();
 
-    // Frame part update section
-    /** Updates the mainframe's title bar according to the currently open document.*/
-    void updateTitle();
+  /** 更新状态栏的鼠标部分。*/
+  void updateMouseStatusBar(const float posx, const float posy);
 
-    /** Updates the Mouse part of the status bar.*/
-    void updateMouseStatusBar( const float posx, const float posy );
+  /** 更新状态栏的视图部分。*/
+  void updateDocStatusBar(const float zoom, const float width,
+                          const float height);
 
-    /** Updates the View part of the status bar.*/
-    void updateDocStatusBar( const float zoom, const float width, const float height );
+  EditorGLCanvas *getCanvas() { return m_glcanvasImageset; }
 
+  PropertiesPanel *getPropsPanel() { return m_propsPanel; }
 
-    EditorGLCanvas* getCanvas()
-    {
-        return m_glcanvasImageset;
-    }
-
-    PropertiesPanel* getPropsPanel()
-    {
-        return m_propsPanel;
-    }
 private:
+  //! 我们附加到的 EditorFrame。
+  EditorFrame *m_frame;
+  //! 构成此 EditorView 一部分的 PropertiesPanel
+  PropertiesPanel *m_propsPanel;
+  //! 我们进行基于 OpenGL 和 CEGUI 渲染的 EditorGLCanvas。
+  EditorGLCanvas *m_glcanvasImageset;
 
-    //! EditorFrame we are attached to.
-    EditorFrame* m_frame;
-    //! PropertiesPanel forming part of this EditorView
-    PropertiesPanel* m_propsPanel;
-    //! The EditorGLCanvas where we do our OpenGL and CEGUI based rendering.
-    EditorGLCanvas* m_glcanvasImageset;
+  /** 已重写，因为基类是 Window。我们不在这里使用它。*/
+  void OnDraw(wxDC *dc);
 
-    /** Overwritten because the base class is a Window. We don't use it here.*/
-    void OnDraw( wxDC* dc );
+  /** 通知我们已创建一个新文档，通过“文件->新建”或“文件->打开”。*/
+  bool OnCreate(wxDocument *doc, long flags);
 
-    /** Notifies us that a new document has been created, either through
-     * File->New or File->Open.*/
-    bool OnCreate( wxDocument* doc, long flags );
+  /** 通知用户关闭当前文档。通过显式关闭，或通过“文件->新建”或“文件->打开”。
+   */
+  bool OnClose(bool deleteWindow = true);
 
-    /** Notifies that the user closes the current document. Either by an explicit
-     * closing, or throuh File->New or File->Open.
-    */
-    bool OnClose( bool deleteWindow = true );
-
-    /** Notification of the UpdateAllViews call in a document.
-    */
-    void OnUpdate( wxView* sender, wxObject* hint );
-
+  /** 文档中 UpdateAllViews 调用的通知。
+   */
+  void OnUpdate(wxView *sender, wxObject *hint);
 };
 
 #endif // _EDITOR_VIEW_H_

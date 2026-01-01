@@ -1,28 +1,27 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  For project details and authors, refer to README and AUTHORS files
+//  有关项目详情和作者，请参阅 README 和 AUTHORS 文件
 //
-//  This file is free software; you can redistribute it and/or
-//  modify it under the terms of the GNU General Public License
-//  as published by the Free Software Foundation; either version 2
-//  of the License, or (at your option) any later version.
+//  本文件是自由软件；您可以根据自由软件基金会发布的
+//  GNU 通用公共许可证条款重新分发和/或修改它；
+//  版本 2 或（由您选择）任何更高版本。
 //
-//  This file is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-//  GNU General Public License for more details.
+//  分发此文件是希望它有用，
+//  但没有任何担保；甚至没有对适销性或
+//  特定用途适用性的暗示担保。有关更多详细信息，请参阅
+//  GNU 通用公共许可证。
 //
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software
-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+//  您应该已收到随本程序一起分发的 GNU 通用公共许可证副本；
+//  如果没有，请写信给 Free Software Foundation, Inc.,
+//  59 Temple Place - Suite 330, Boston, MA  02111-1307, USA。
 //
-//  To view the licence online, go to: http://www.gnu.org/copyleft/gpl.html
+//  要在线查看许可证，请访问：http://www.gnu.org/copyleft/gpl.html
 ////////////////////////////////////////////////////////////////////////////////
 
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
 //////////////////////////////////////////////////////////////////////////
-// DEFINES
+// 定义
 //////////////////////////////////////////////////////////////////////////
 
 #define PACKAGE_VERSION "0.7.1"

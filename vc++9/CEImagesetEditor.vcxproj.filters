@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{a22f7e0f-abba-4122-b1f9-bbe233d23a43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Editor/View Framework">
+      <UniqueIdentifier>{ff190648-0b2d-4a02-b0e2-ba7516d3ebd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Dialogs">
+      <UniqueIdentifier>{047d1a82-5b93-4032-ad61-becb51801232}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Widgets">
+      <UniqueIdentifier>{320d5f9d-70fd-442f-8875-f46ea4da43aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\XML">
+      <UniqueIdentifier>{bae59504-6c5e-4eac-ad31-7b17f56c0b7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{eabc0d8f-1560-43dd-8535-5918b2771bde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{e685ec53-e3eb-4c94-92c0-7a77cd8eb345}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Editor/View Framework">
+      <UniqueIdentifier>{339d72b7-470c-4db7-b2f9-a675478e444a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Dialogs">
+      <UniqueIdentifier>{019c148a-8936-4c97-a93b-637118971c63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{629f0c8d-9e0d-440a-a2bd-e1b0aba74d20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Widgets">
+      <UniqueIdentifier>{3b1347df-f480-456d-9388-1491c291aad6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\XML">
+      <UniqueIdentifier>{349bf4de-0b13-4810-9668-3dfc80329016}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components">
+      <UniqueIdentifier>{dcedfb15-d178-4621-8def-f6bb7052b68e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Setup">
+      <UniqueIdentifier>{b6272c4a-1702-4fab-97a4-6f828dcdd201}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\CEImagesetEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EditorDocument.cpp">
+      <Filter>Source Files\Editor/View Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EditorFrame.cpp">
+      <Filter>Source Files\Editor/View Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EditorGLCanvas.cpp">
+      <Filter>Source Files\Editor/View Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EditorView.cpp">
+      <Filter>Source Files\Editor/View Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\DialogAbout.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\DialogResourceGroups.cpp">
+      <Filter>Source Files\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ElasticBox.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ElasticBoxProperties.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ElasticBoxWindowRenderer.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ImagesetHandler.cpp">
+      <Filter>Source Files\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PropertiesPanel.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\wxPathCellEditor.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\inc\CEImagesetEditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\EditorDocument.h">
+      <Filter>Header Files\Editor/View Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\EditorFrame.h">
+      <Filter>Header Files\Editor/View Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\EditorGLCanvas.h">
+      <Filter>Header Files\Editor/View Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\EditorView.h">
+      <Filter>Header Files\Editor/View Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\DialogAbout.h">
+      <Filter>Header Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\DialogResourceGroups.h">
+      <Filter>Header Files\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\CEGUIHelper.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\ElasticBox.h">
+      <Filter>Header Files\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\ElasticBoxProperties.h">
+      <Filter>Header Files\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\ElasticBoxWindowRenderer.h">
+      <Filter>Header Files\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\ImagesetHandler.h">
+      <Filter>Header Files\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\PropertiesPanel.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\wxPathCellEditor.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\Config.h">
+      <Filter>Header Files\Setup</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

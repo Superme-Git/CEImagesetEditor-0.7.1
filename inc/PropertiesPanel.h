@@ -1,182 +1,174 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  For project details and authors, refer to README and AUTHORS files
+//  有关项目详情和作者，请参阅 README 和 AUTHORS 文件
 //
-//  This file is free software; you can redistribute it and/or
-//  modify it under the terms of the GNU General Public License
-//  as published by the Free Software Foundation; either version 2
-//  of the License, or (at your option) any later version.
+//  本文件是自由软件；您可以根据自由软件基金会发布的
+//  GNU 通用公共许可证条款重新分发和/或修改它；
+//  版本 2 或（由您选择）任何更高版本。
 //
-//  This file is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-//  GNU General Public License for more details.
+//  分发此文件是希望它有用，
+//  但没有任何担保；甚至没有对适销性或
+//  特定用途适用性的暗示担保。有关更多详细信息，请参阅
+//  GNU 通用公共许可证。
 //
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software
-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+//  您应该已收到随本程序一起分发的 GNU 通用公共许可证副本；
+//  如果没有，请写信给 Free Software Foundation, Inc.,
+//  59 Temple Place - Suite 330, Boston, MA  02111-1307, USA。
 //
-//  To view the licence online, go to: http://www.gnu.org/copyleft/gpl.html
+//  要在线查看许可证，请访问：http://www.gnu.org/copyleft/gpl.html
 ////////////////////////////////////////////////////////////////////////////////
 #ifndef _PROPERTIES_PANEL_H_
 #define _PROPERTIES_PANEL_H_
 
-// Standard wxWidget includes
-#include "wx/wx.h" 
+// 标准 wxWidget 头文件
+#include "wx/wx.h"
 
 #include "EditorDocument.h"
 
-#include <wx/grid.h>
 #include <wx/dynarray.h>
-
+#include <wx/grid.h>
 
 class EditorView;
 
-class PropertiesPanel: public wxPanel
-{
+class PropertiesPanel : public wxPanel {
 public:
-    //! Constructor
-    PropertiesPanel(wxWindow* parent, const wxPoint& pos, const wxSize& size);
+  //! 构造函数
+  PropertiesPanel(wxWindow *parent, const wxPoint &pos, const wxSize &size);
 
-    //! Sets the view which we are a part of.
-    void setView (EditorView* aView);
+  //! 设置我们所属的视图。
+  void setView(EditorView *aView);
 
-    //! Create the widgets that populate the PropertiesPanel.
-    void createContent();
+  //! 创建填充 PropertiesPanel 的组件。
+  void createContent();
 
-    //! Resets the PropertiesPanel to it's initial state.
-    void reset();
+  //! 将 PropertiesPanel 重置为其初始状态。
+  void reset();
 
-    //
-    // The following are all GUI handler members; they react to changes
-    // in the panel GUI and update the editor document accordingly.
-    //
-    // Note that these members should not directly update anything
-    // relating to the view, that will happen via the document's
-    // response to being updated.
-    //
-    //! Handler for when the image file browse button is pressed
-    void onBrowseImageFile(wxCommandEvent& WXUNUSED(event));
-    //! Handler for when the imageset name is changed by typing
-    void onChangeImagesetName(wxCommandEvent& WXUNUSED(event));
-    //! Handler for when the image filename is changed by typing.
-    void onChangeImageFilename(wxCommandEvent& WXUNUSED(event));
-    //! Handler for when the native resolution selection changes
-    void onChangeNativeResolution(wxCommandEvent& WXUNUSED(event));
-    //! Handler for when the auto scaled setting is changed.
-    void onChangeAutoScaled(wxCommandEvent& WXUNUSED(event));
-    //! Handler called when a row is added to the image definitions grid.
-    void onGridAddRow(wxCommandEvent& WXUNUSED(event));
-    //! Handler called when a row is removed from the image definitions grid.
-    void onGridDelRow(wxCommandEvent& WXUNUSED(event));
-    //! Handler called when the contents of a grid cell is changed.
-    void onGridCellChange(wxGridEvent& event);
-    //! Handler called when the a grid cell is about to be edited.
-    void onGridCellEdit(wxGridEvent& event);
-    //! Handler called when a grid cell (row) is selected.
-    void onGridCellSelect(wxGridEvent& event);
+  //
+  // 以下均为 GUI 处理程序成员；它们对面板 GUI 中的更改做出反应，
+  // 并相应地更新编辑器文档。
+  //
+  // 请注意，这些成员不应直接更新与视图相关的任何内容，
+  // 这将通过文档对更新的响应发生。
+  //
+  //! 按下图像文件浏览按钮时的处理程序
+  void onBrowseImageFile(wxCommandEvent &WXUNUSED(event));
+  //! 通过键入更改图像集名称时的处理程序
+  void onChangeImagesetName(wxCommandEvent &WXUNUSED(event));
+  //! 通过键入更改图像文件名时的处理程序。
+  void onChangeImageFilename(wxCommandEvent &WXUNUSED(event));
+  //! 原始分辨率选择更改时的处理程序
+  void onChangeNativeResolution(wxCommandEvent &WXUNUSED(event));
+  //! 更改自动缩放设置时的处理程序。
+  void onChangeAutoScaled(wxCommandEvent &WXUNUSED(event));
+  //! 将行添加到图像定义网格时调用的处理程序。
+  void onGridAddRow(wxCommandEvent &WXUNUSED(event));
+  //! 从图像定义网格中删除行时调用的处理程序。
+  void onGridDelRow(wxCommandEvent &WXUNUSED(event));
+  //! 更改网格单元格内容时调用的处理程序。
+  void onGridCellChange(wxGridEvent &event);
+  //! 当网格单元格即将被编辑时调用的处理程序。
+  void onGridCellEdit(wxGridEvent &event);
+  //! 选择网格单元格（行）时调用的处理程序。
+  void onGridCellSelect(wxGridEvent &event);
 
-    //
-    // The following are accessor and manipulator members which are used
-    // to obtain or update the information in the GUI panel widgets.
-    //
-    // Generally the manipulators are called by the EditorView in response
-    // to something on the EditorDocument changing.  The EditorDocument
-    // should never really call these members directly - everything should
-    // be done via the EditorView; this keeps a nice document/view abstraction
-    // and saves everything from being more tightly coupled.
-    //
-    //! Return the Imageset name as presented in the panel.
-    wxString getImagesetName() const;
+  //
+  // 以下是访问器和操作器成员，用于获取或更新 GUI 面板组件中的信息。
+  //
+  // 通常，操作器由 EditorView 调用以响应 EditorDocument 上的更改。
+  // EditorDocument 实际上不应该直接调用这些成员 - 一切都应该通过
+  // EditorView 完成；这保持了良好的文档/视图抽象，并避免了一切过于紧密耦合。
+  //
+  //! 返回面板中显示的图像集名称。
+  wxString getImagesetName() const;
 
-    //! Set the Imageset name to be presented in the panel.
-    void setImagesetName(const wxString& name);
+  //! 设置要在面板中显示的图像集名称。
+  void setImagesetName(const wxString &name);
 
-    //! Return the source image filename as presented in the panel.
-    wxString getImageFilename() const;
+  //! 返回面板中显示的源图像文件名。
+  wxString getImageFilename() const;
 
-    //! Set the source image filename as presented in the panel.
-    void setImageFilename(const wxString& name);
+  //! 设置要在面板中显示的源图像文件名。
+  void setImageFilename(const wxString &name);
 
-    //! Return wxPoint describing the native resolution selected in the panel.
-    wxPoint getNativeResolution() const;
+  //! 返回描述面板中选择的原始分辨率的 wxPoint。
+  wxPoint getNativeResolution() const;
 
-    //! Set the native resolution to be selected in the panel.
-    void setNativeResolution(const wxPoint& NativeResolution);
+  //! 设置要在面板中选择的原始分辨率。
+  void setNativeResolution(const wxPoint &NativeResolution);
 
-    //! Return whether the auto scale checkbox is selected.
-    bool getAutoScaled() const;
+  //! 返回是否选中了自动缩放复选框。
+  bool getAutoScaled() const;
 
-    //! Set whether the auto scale checkbox is selected.
-    void setAutoScaled(const bool AutoScaled);
+  //! 设置是否选中自动缩放复选框。
+  void setAutoScaled(const bool AutoScaled);
 
-    //! Adds a new image region definition to the grid
-    void addRegion(const wxString& name, const wxRect& dim, int rowindex = -1);
+  //! 向网格添加新的图像区域定义
+  void addRegion(const wxString &name, const wxRect &dim, int rowindex = -1);
 
-    //! Removes an image region definition from the grid.
-    int deleteRegion(const wxString& name);
+  //! 从网格中移除图像区域定义。
+  int deleteRegion(const wxString &name);
 
-    //! Removes all image region definitions from the grid.
-    void deleteAllRegions();
+  //! 从网格中移除所有图像区域定义。
+  void deleteAllRegions();
 
-    //! Selects an image region within the grid
-    int selectRegion(const wxString& name);
+  //! 在网格中选择一个图像区域
+  int selectRegion(const wxString &name);
 
-    //! Returns the name of any currently selection image region.
-    wxString getSelectedRegion() const;
+  //! 返回任何当前选择的图像区域的名称。
+  wxString getSelectedRegion() const;
 
-    //! Sets the area fields for a image region.
-    void setRegionArea(const wxString& name, const wxRect& dim);
+  //! 设置图像区域的区域字段。
+  void setRegionArea(const wxString &name, const wxRect &dim);
 
-    //! Returns the currently defined area for an image region.
-    wxRect getRegionArea(const wxString& name) const;
+  //! 返回当前为图像区域定义的区域。
+  wxRect getRegionArea(const wxString &name) const;
 
-    //! renames an image region definition.
-    void renameRegion( const wxString& currentname, const wxString& newname );
-
+  //! 重命名图像区域定义。
+  void renameRegion(const wxString &currentname, const wxString &newname);
 
 private:
-    //! returns whether we have access to a valid EditorDocument object.
-    bool isDocumentValid() const;
+  //! 返回我们是否可以访问有效的 EditorDocument 对象。
+  bool isDocumentValid() const;
 
-    //! returns the current EditorDocument object.
-    EditorDocument* getDocument() const;
+  //! 返回当前的 EditorDocument 对象。
+  EditorDocument *getDocument() const;
 
-    //! returns a unique name to be used for a new image region.
-    wxString getUniqueImageName();
+  //! 返回用于新图像区域的唯一名称。
+  wxString getUniqueImageName();
 
-    static const char s_charParseNativeResolution;
+  static const char s_charParseNativeResolution;
 
-    void createPropertiesGrid(wxWindow* parent);
+  void createPropertiesGrid(wxWindow *parent);
 
-    //! returns the index of a named region in the grid
-    int getInternalRegionIndex( const wxString& name ) const;
+  //! 返回网格中命名区域的索引
+  int getInternalRegionIndex(const wxString &name) const;
 
-    //! Return the given path 'filename' relative to the default resource group directory
-    wxString getDefaultResourceGroupRelativePath( const wxString& filename ) const;
+  //! 返回相对于默认资源组目录的给定路径 'filename'
+  wxString getDefaultResourceGroupRelativePath(const wxString &filename) const;
 
-    //
-    // Data fields
-    //
-    //! The view to which we are attached.
-    EditorView* m_view;
-    //! Text control that holds the name of the Imageset
-    wxTextCtrl* m_imagesetNameTextCtrl;
-    //! Text control that holds the file name of the source image.
-    wxTextCtrl* m_imageFilenameTextCtrl;
-    //! Button that invokes the file dialog to select an image file.
-    wxButton* m_imageFilenameBrowseButton;
-    //! Combobox that presents a set of native resolution options
-    wxComboBox* m_nativeResolutionComboBox;
-    //! Checkbox which controls the auto-scaled option.
-    wxCheckBox* m_autoScaleCheckbox;
-    //! Grid that holds the image region definitions
-    wxGrid* m_propertiesGrid;
-    //! number GUID used to generate unique image definition names.
-    size_t m_imageGUID;
+  //
+  // 数据字段
+  //
+  //! 我们附加到的视图。
+  EditorView *m_view;
+  //! 保存图像集名称的文本控件
+  wxTextCtrl *m_imagesetNameTextCtrl;
+  //! 保存源图像文件名的文本控件。
+  wxTextCtrl *m_imageFilenameTextCtrl;
+  //! 调用文件对话框以选择图像文件的按钮。
+  wxButton *m_imageFilenameBrowseButton;
+  //! 提供一组原始分辨率选项的组合框
+  wxComboBox *m_nativeResolutionComboBox;
+  //! 控制自动缩放选项的复选框。
+  wxCheckBox *m_autoScaleCheckbox;
+  //! 保存图像区域定义的网格
+  wxGrid *m_propertiesGrid;
+  //! 用于生成唯一图像定义名称的数字 GUID。
+  size_t m_imageGUID;
 
-    wxString m_oldRowName;
+  wxString m_oldRowName;
 
-    DECLARE_EVENT_TABLE()
+  DECLARE_EVENT_TABLE()
 };
 
 #endif // _PROPERTIES_PANEL_H_

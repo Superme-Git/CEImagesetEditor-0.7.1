@@ -84,7 +84,8 @@ private:
     /** Pointer to cegui singleton.*/
     CEGUI::System* m_GUISystem;
     /** Pointer to cegui renderer.*/
-    CEGUI::OpenGLRenderer* m_GUIRenderer;
+    /** OpenGL context for wxWidgets 3.0+ */
+    wxGLContext* m_context;
 
     // CEGUI widgets
     CEGUI::Window* m_imagesetStaticImage;
@@ -214,3 +215,4 @@ private:
 };
 
 #endif // _EDITOR_CANVAS_H_
+

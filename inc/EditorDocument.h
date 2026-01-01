@@ -1,116 +1,115 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  For project details and authors, refer to README and AUTHORS files
+//  有关项目详情和作者，请参阅 README 和 AUTHORS 文件
 //
-//  This file is free software; you can redistribute it and/or
-//  modify it under the terms of the GNU General Public License
-//  as published by the Free Software Foundation; either version 2
-//  of the License, or (at your option) any later version.
+//  本文件是自由软件；您可以根据自由软件基金会发布的
+//  GNU 通用公共许可证条款重新分发和/或修改它；
+//  版本 2 或（由您选择）任何更高版本。
 //
-//  This file is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-//  GNU General Public License for more details.
+//  分发此文件是希望它有用，
+//  但没有任何担保；甚至没有对适销性或
+//  特定用途适用性的暗示担保。有关更多详细信息，请参阅
+//  GNU 通用公共许可证。
 //
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software
-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+//  您应该已收到随本程序一起分发的 GNU 通用公共许可证副本；
+//  如果没有，请写信给 Free Software Foundation, Inc.,
+//  59 Temple Place - Suite 330, Boston, MA  02111-1307, USA。
 //
-//  To view the licence online, go to: http://www.gnu.org/copyleft/gpl.html
+//  要在线查看许可证，请访问：http://www.gnu.org/copyleft/gpl.html
 ////////////////////////////////////////////////////////////////////////////////
 
 #ifndef _EDITOR_DOCUMENT_H_
 #define _EDITOR_DOCUMENT_H_
 
-// Standard wxWidget includes
-#include "wx/wx.h" 
-// More specific wxWidgets includes
+// 标准 wxWidget 头文件
+#include "wx/wx.h"
+// 更具体的 wxWidgets 头文件
 #include "wx/docview.h"
-#include "wx/hashmap.h" 
+#include "wx/hashmap.h"
 
 #include <CEGUIImageset.h>
 
 class EditorView;
 
-/** The application's Document implementation.
-*/
-class EditorDocument : public wxDocument
-{
-    DECLARE_DYNAMIC_CLASS( EditorDocument )
+/** 应用程序的文档实现。
+ */
+class EditorDocument : public wxDocument {
+  DECLARE_DYNAMIC_CLASS(EditorDocument)
 
-    // Attributes
+  // 属性
 public:
-    /** Constructor.
-    */
-    EditorDocument();
+  /** 构造函数。
+   */
+  EditorDocument();
 
-    /** Opens the given imageset file as editable.
-    */
-    bool OnOpenDocument( const wxString& filename );
+  /** 打开给定的图像集文件进行编辑。
+   */
+  bool OnOpenDocument(const wxString &filename);
 
-    /** Starts a new imageset.
-    */
-    bool OnNewDocument() ;
+  /** 开始一个新的图像集。
+   */
+  bool OnNewDocument();
 
-    /** Saves the current imageset to its filepath.
-    */
-    bool OnSaveDocument( const wxString& filename );
+  /** 将当前图像集保存到其文件路径。
+   */
+  bool OnSaveDocument(const wxString &filename);
 
-    /** The current imageset has been closed. The system has prompted the user to save changes, if any.
-    */
-    bool OnCloseDocument();
+  /** 当前图像集已关闭。如果有更改，系统已提示用户保存。
+   */
+  bool OnCloseDocument();
 
-    /** Sets the document to being 'dirty' and updates the attached views.*/
-    void Modify ( bool modify );
+  /** 将文档设置为“脏”并更新附加的视图。*/
+  void Modify(bool modify);
 
-    /** Resets the document for editing eg. after a resolution-change which re-starts Ogre.*/
-    void reset() ;
+  /** 重置文档以进行编辑，例如在更改分辨率后重新启动 Ogre。*/
+  void reset();
 
-    // possible actions on the document
-    void setImageFilename( const wxString& newfilename );
-    void setImagesetName( const wxString& newname );
-    void setNativeResolution( const wxPoint& newnativeres );
-    void setAutoScaled( const bool newAutoScaled );
-    void addRegion( const wxString& name, const wxRect& dim );
-    void deleteRegion( const wxString& name );
-    void deleteAllRegions();
-    void setRegionArea( const wxString& name, const wxRect& dim, const bool evt_src = false );
-    void renameRegion( const wxString& currentname, const wxString& newname );
+  // 对文档的可能操作
+  void setImageFilename(const wxString &newfilename);
+  void setImagesetName(const wxString &newname);
+  void setNativeResolution(const wxPoint &newnativeres);
+  void setAutoScaled(const bool newAutoScaled);
+  void addRegion(const wxString &name, const wxRect &dim);
+  void deleteRegion(const wxString &name);
+  void deleteAllRegions();
+  void setRegionArea(const wxString &name, const wxRect &dim,
+                     const bool evt_src = false);
+  void renameRegion(const wxString &currentname, const wxString &newname);
 
-    //! Return current area for a region
-    wxRect getRegionArea( const wxString& name ) const;
+  //! 返回区域的当前面积
+  wxRect getRegionArea(const wxString &name) const;
 
 private:
-    //! returns whether we have a valid view assigned
-    bool isViewValid() const;
-    
-    //! returns a pointer to our view (if any)
-    EditorView* getView() const;
+  //! 返回我们是否分配了有效视图
+  bool isViewValid() const;
 
-    //! Helper that generates a real CEGUI imageset based upon the defined regions.*/
-    CEGUI::Imageset* generateRealImageset();
+  //! 返回指向我们视图的指针（如果有）
+  EditorView *getView() const;
 
-    //! Return the given path 'filename' relative to the default resource group directory
-    wxString getDefaultResourceGroupRelativePath( const wxString& filename ) const;
+  //! 根据定义的区域生成真实 CEGUI 图像集的助手。*/
+  CEGUI::Imageset *generateRealImageset();
 
-    //! default value for the NativeResolution value.
-    static const wxPoint c_defaultNativeResolution;
+  //! 返回相对于默认资源组目录的给定路径 'filename'
+  wxString getDefaultResourceGroupRelativePath(const wxString &filename) const;
 
-    //! Name of the Imageset
-    wxString m_imagesetName;
+  //! NativeResolution 值的默认值。
+  static const wxPoint c_defaultNativeResolution;
 
-    //! Filename of the source image.
-    wxString m_imageFilename;
+  //! 图像集的名称
+  wxString m_imagesetName;
 
-    // Document data
-    wxPoint m_nativeResolution;
+  //! 源图像的文件名。
+  wxString m_imageFilename;
 
-    // Document data
-    bool m_autoScaled;
+  // 文档数据
+  wxPoint m_nativeResolution;
 
-    // Document data
-    WX_DECLARE_STRING_HASH_MAP( wxRect, mapNamedRegion );
+  // 文档数据
+  bool m_autoScaled;
 
-    mapNamedRegion m_mapSetRectangles;
+  // 文档数据
+  WX_DECLARE_STRING_HASH_MAP(wxRect, mapNamedRegion);
+
+  mapNamedRegion m_mapSetRectangles;
 };
 
 #endif // _EDITOR_DOCUMENT_H_

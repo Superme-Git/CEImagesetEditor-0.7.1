@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1D460A50-D638-9345-A8CA-552A156D523C}</ProjectGuid>
+    <RootNamespace>CEImagesetEditor</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Debug\</OutDir>
+    <IntDir>.\Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;..\inc;$(CEGUI)\cegui\include;$(WXWIDGETS)\include;$(WXWIDGETS)\include\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
+      <ObjectFileName>.\Debug/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>HAVE_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../cegui_mk2/cegui/include;../wxWidgets-2.6.3/include;../wxWidgets-2.6.3/include/msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>OpenGL32.lib;GLU32.lib;comctl32.lib;rpcrt4.lib;CEGUIBase_d.lib;CEGUIOpenGLRenderer_d.lib;wxbase30ud.lib;wxmsw30ud_core.lib;wxmsw30ud_gl.lib;wxmsw30ud_adv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\bin\debug\CEImagesetEditor_d.exe</OutputFile>
+      <AdditionalLibraryDirectories>.;$(CEGUI)\lib;$(WXWIDGETS)\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)CEImagesetEditor_d.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(CEGUI)\bin\CEGUIBase_d.dll $(CE_IMAGESET_EDITOR)\bin\debug /Y
+copy $(CEGUI)\bin\CEGUIExpatParser_d.dll $(CE_IMAGESET_EDITOR)\bin\debug /Y
+copy $(CEGUI)\bin\CEGUIFalagardWRBase_d.dll $(CE_IMAGESET_EDITOR)\bin\debug /Y
+copy $(CEGUI)\bin\CEGUISILLYImageCodec_d.dll $(CE_IMAGESET_EDITOR)\bin\debug /Y
+copy $(CEGUI)\bin\CEGUITGAImageCodec_d.dll $(CE_IMAGESET_EDITOR)\bin\debug /Y
+copy $(CEGUI)\bin\CEGUIOpenGLRenderer_d.dll $(CE_IMAGESET_EDITOR)\bin\debug /Y
+copy $(CEGUI)\dependencies\bin\SILLY_d.dll $(CE_IMAGESET_EDITOR)\bin\debug /Y
+xcopy $(CE_IMAGESET_EDITOR)\data $(CE_IMAGESET_EDITOR)\bin\debug\data /S /I /Y
+xcopy $(CE_IMAGESET_EDITOR)\data $(CE_IMAGESET_EDITOR)\vc++8\data /S /I /Y
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <AdditionalIncludeDirectories>.;..\inc;$(CEGUI)\cegui\include;$(WXWIDGETS)\include;$(WXWIDGETS)\include\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
+      <ObjectFileName>.\Release/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat />
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>HAVE_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../cegui_mk2/cegui/include;../wxWidgets-2.6.3/include;../wxWidgets-2.6.3/include/msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>OpenGL32.lib;GLU32.lib;comctl32.lib;rpcrt4.lib;CEGUIBase.lib;CEGUIOpenGLRenderer.lib;wxbase30u.lib;wxmsw30u_core.lib;wxmsw30u_gl.lib;wxmsw30u_adv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\bin\release\CEImagesetEditor.exe</OutputFile>
+      <AdditionalLibraryDirectories>.;$(CEGUI)\lib;$(WXWIDGETS)\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(CEGUI)\bin\CEGUIBase.dll $(CE_IMAGESET_EDITOR)\bin\release /Y
+copy $(CEGUI)\bin\CEGUIExpatParser.dll $(CE_IMAGESET_EDITOR)\bin\release /Y
+copy $(CEGUI)\bin\CEGUIFalagardWRBase.dll $(CE_IMAGESET_EDITOR)\bin\release /Y
+copy $(CEGUI)\bin\CEGUISILLYImageCodec.dll $(CE_IMAGESET_EDITOR)\bin\release /Y
+copy $(CEGUI)\bin\CEGUITGAImageCodec.dll $(CE_IMAGESET_EDITOR)\bin\release /Y
+copy $(CEGUI)\bin\CEGUIOpenGLRenderer.dll $(CE_IMAGESET_EDITOR)\bin\release /Y
+copy $(CEGUI)\dependencies\bin\SILLY.dll $(CE_IMAGESET_EDITOR)\bin\release /Y
+xcopy $(CE_IMAGESET_EDITOR)\data $(CE_IMAGESET_EDITOR)\bin\release\data /S /I /Y
+xcopy $(CE_IMAGESET_EDITOR)\data $(CE_IMAGESET_EDITOR)\vc++8\data /S /I /Y
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\CEImagesetEditor.cpp" />
+    <ClCompile Include="..\src\DialogAbout.cpp" />
+    <ClCompile Include="..\src\DialogResourceGroups.cpp" />
+    <ClCompile Include="..\src\EditorDocument.cpp" />
+    <ClCompile Include="..\src\EditorFrame.cpp" />
+    <ClCompile Include="..\src\EditorGLCanvas.cpp" />
+    <ClCompile Include="..\src\EditorView.cpp" />
+    <ClCompile Include="..\src\ElasticBox.cpp" />
+    <ClCompile Include="..\src\ElasticBoxProperties.cpp" />
+    <ClCompile Include="..\src\ElasticBoxWindowRenderer.cpp" />
+    <ClCompile Include="..\src\ImagesetHandler.cpp" />
+    <ClCompile Include="..\src\PropertiesPanel.cpp" />
+    <ClCompile Include="..\src\wxPathCellEditor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\inc\CEGUIHelper.h" />
+    <ClInclude Include="..\inc\CEImagesetEditor.h" />
+    <ClInclude Include="..\inc\Config.h" />
+    <ClInclude Include="..\inc\DialogAbout.h" />
+    <ClInclude Include="..\inc\DialogResourceGroups.h" />
+    <ClInclude Include="..\inc\EditorDocument.h" />
+    <ClInclude Include="..\inc\EditorFrame.h" />
+    <ClInclude Include="..\inc\EditorGLCanvas.h" />
+    <ClInclude Include="..\inc\EditorView.h" />
+    <ClInclude Include="..\inc\ElasticBox.h" />
+    <ClInclude Include="..\inc\ElasticBoxProperties.h" />
+    <ClInclude Include="..\inc\ElasticBoxWindowRenderer.h" />
+    <ClInclude Include="..\inc\ImagesetHandler.h" />
+    <ClInclude Include="..\inc\PropertiesPanel.h" />
+    <ClInclude Include="..\inc\wxPathCellEditor.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

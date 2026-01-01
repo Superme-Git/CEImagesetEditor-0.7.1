@@ -69,10 +69,11 @@ END_EVENT_TABLE()
 
 //-----------------------------------------------------------------------
 EditorGLCanvas::EditorGLCanvas( EditorView* v, wxWindow* parent, const wxPoint& pos, const wxSize& size ) :
-    wxGLCanvas( parent, static_cast<const wxGLContext *>( 0 ), -1, pos, size , wxSUNKEN_BORDER | wxVSCROLL | wxHSCROLL ),
+    wxGLCanvas( parent, wxID_ANY, NULL, pos, size , wxSUNKEN_BORDER | wxVSCROLL | wxHSCROLL ),
     m_view( v ),
     m_GUISystem( 0 ),
     m_GUIRenderer( 0 ),
+    m_context( 0 ),
     m_imagesetStaticImage( 0 ),
     m_useBigSteps( true ),
     m_zoomFactor( 1.0f ),
@@ -85,8 +86,11 @@ EditorGLCanvas::EditorGLCanvas( EditorView* v, wxWindow* parent, const wxPoint& 
     m_scrollDocY( 0 ),
     m_scrollPageY( 0 )
 {
+    // Create OpenGL context (required for wxWidgets 3.0+)
+    m_context = new wxGLContext(this);
+    
     // Init one-time-only stuff
-    SetCurrent();
+    SetCurrent(*m_context);
 
     // we will use a cross-hair cursor
     SetCursor( wxCURSOR_CROSS );
@@ -100,6 +104,9 @@ EditorGLCanvas::~EditorGLCanvas()
 {
     // cleanup CEGUI.
     cleanupCEGUI();
+    
+    // Delete OpenGL context
+    delete m_context;
 }
 
 //-----------------------------------------------------------------------
